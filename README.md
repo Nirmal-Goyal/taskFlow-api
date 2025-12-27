@@ -35,15 +35,17 @@ This project is built to demonstrate real-world backend engineering practices, i
 
 ## 📁 Project Structure
 
+```text
 src/
-├── config/ # Database configuration
-├── controllers/ # Route controllers (business logic)
-├── models/ # Mongoose schemas
-├── routes/ # API route definitions
-├── middlewares/ # Auth, validation, error handling
-├── validations/ # Zod schemas
-├── utils/ # Custom utilities (AppError)
-└── app.js # App entry point
+├── config/          # Database configuration
+├── controllers/     # Route controllers (business logic)
+├── models/          # Mongoose schemas
+├── routes/          # API route definitions
+├── middlewares/     # Auth, validation, error handling
+├── validations/     # Zod schemas
+├── utils/           # Custom utilities (AppError)
+└── app.js           # Application entry point
+```
 
 ---
 
@@ -88,10 +90,12 @@ POST /api/auth/login
 
 #### Response:
 
+```json
 {
   "message": "Login successful",
   "token": "JWT_TOKEN"
 }
+```
 
 
 ### 🔹 Task Routes (Protected)
@@ -101,10 +105,12 @@ All task routes require a valid JWT.
 #### Create Task
 POST /api/tasks
 
+```json
 {
   "title": "Build backend API",
   "description": "Complete TaskFlow backend project"
 }
+```
 
 #### Get User Tasks
 GET /api/tasks
@@ -115,9 +121,11 @@ Returns only tasks belonging to the authenticated user.
 #### Update Task
 PUT /api/tasks/:id
 
+```json
 {
   "completed": true
 }
+```
 
 #### Delete Task
 DELETE /api/tasks/:id
@@ -136,6 +144,7 @@ Custom AppError class is used for clean error propagation
 
 ### Example error response:
 
+```json
 {
   "message": "Validation failed",
   "errors": [
@@ -145,6 +154,7 @@ Custom AppError class is used for clean error propagation
     }
   ]
 }
+```
 
 ---
 
