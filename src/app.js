@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js"
 import taskRoutes from "./routes/taskRoutes.js"
+import errorHandler from "./middlewares/errorHandler.js";
 
 dotenv.config()
 
@@ -14,6 +15,8 @@ connectDB();
 app.use("/api/auth", authRoutes);
 
 app.use("/api/tasks", taskRoutes);
+
+app.use(errorHandler);
 
 app.get("/", (req, res) => {
     res.json({

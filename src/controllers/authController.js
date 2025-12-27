@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import AppError from "../utils/AppError.js";
 
 export const register = async(req, res) => {
     const {name, email, password} = req.body;
@@ -41,16 +42,12 @@ export const login = async(req, res) => {
     try{
         const user = await User.findOne({email});
         if(!user){
-            return res.status(400).json({
-                msg: "Invalid credentials"
-            });
+            throw new AppError("Invalid credentials", 400);
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch){
-            return res.status(400).json({
-                msg: "Invalid Credentials"
-            });
+            throw new AppError("Invalid credentials", 400);
         }
 
         const token = jwt.sign(
