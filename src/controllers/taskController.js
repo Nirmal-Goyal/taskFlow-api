@@ -18,13 +18,30 @@ export const createTask = async(req, res) => {
     }
 }
 
-// GET ALL TASKS FOR LOGGED-IN USER
+// GET ALL TASKS FOR LOGGED-IN USER (with pagination and sorting)
 export const getTasks = async(req, res) => {
     try {
+        const page = Math.max(parseInt(req.query.page) || 1, 1);
+        const limit = Math.min(parseInt(req.query.limit) || 10, 50);
+        const skip = (page-1)*limit;
+
         const tasks = await Task.find({owner: req.user._id}).sort({
             createdAt: -1,
         })
-        res.json(tasks)
+        .skip(skip)
+        .limit(limit);
+
+        const totalTasks = await Task.countDocuments({
+            owner: req.user._id,
+        })
+
+        res.json({
+            page,
+            limit,
+            totalTasks,
+            totalPages: Math.ceil(totalTasks/limit),
+            tasks,
+        });
     } catch (error) {
         res.status(500).json({
             msg: "Failed to fetch tasks"
