@@ -25,15 +25,18 @@ export const getTasks = async(req, res) => {
         const limit = Math.min(parseInt(req.query.limit) || 10, 50);
         const skip = (page-1)*limit;
 
-        const tasks = await Task.find({owner: req.user._id}).sort({
+        const filter = {owner: req.user._id};
+        if(req.query.completed !== undefined){
+            filter.completed = req.query.completed === "true";
+        }
+
+        const tasks = await Task.find(filter).sort({
             createdAt: -1,
         })
         .skip(skip)
         .limit(limit);
 
-        const totalTasks = await Task.countDocuments({
-            owner: req.user._id,
-        })
+        const totalTasks = await Task.countDocuments(filter);
 
         res.json({
             page,
