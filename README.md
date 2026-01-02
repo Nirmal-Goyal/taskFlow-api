@@ -1,10 +1,9 @@
-# ✅ TaskFlow API — Professional README
+# TaskFlow API
 
-## 📌 TaskFlow API
+A production-ready backend REST API for task management with authentication, pagination, filtering, and user-based data ownership.
 
-A backend REST API for task management with authentication, user-based data ownership, and clean API design.
+This project demonstrates real-world backend engineering practices including API design, authentication, validation, documentation, and system evolution from v1 to v2.
 
-This project is built to demonstrate real-world backend engineering practices, including authentication, authorization, validation, and error handling.
 
 ---
 
@@ -17,6 +16,16 @@ This project is built to demonstrate real-world backend engineering practices, i
 - Centralized error handling  
 - Clean and scalable project structure  
 - MongoDB persistence with Mongoose  
+
+---
+
+## 🚀 What's New in v2
+
+- Pagination support for task listing
+- Filtering tasks by completion status
+- API sorting by creation date
+- Interactive API documentation using Swagger (OpenAPI)
+- Improved API usability for real-world consumers
 
 ---
 
@@ -56,9 +65,9 @@ src/
 3. User logs in and receives a JWT token  
 4. Token is sent in the Authorization header for protected routes  
 
----
-
 Authorization: Bearer <JWT_TOKEN>
+
+---
 
 ## 📦 API Endpoints
 
@@ -115,8 +124,8 @@ POST /api/tasks
 #### Get User Tasks
 GET /api/tasks
 
-
 Returns only tasks belonging to the authenticated user.
+
 
 #### Update Task
 PUT /api/tasks/:id
@@ -132,15 +141,45 @@ DELETE /api/tasks/:id
 
 ---
 
+## Pagination & Filtering Examples (v2)
+
+#### Get first page of tasks (default limit):
+GET /api/tasks
+
+#### Get second page with custom limit:
+GET /api/tasks?page=2&limit=5
+
+#### Get only completed tasks:
+GET /api/tasks?completed=true
+
+#### Combine filtering with pagination:
+GET /api/tasks?completed=false&page=1&limit=10
+
+---
+
+## API Documentation
+
+### Interactive API documentation is available using Swagger (OpenAPI).
+
+#### When running locally:
+http://localhost:3000/api/docs
+
+
+#### The documentation includes:
+
+- Authentication endpoints
+- Task CRUD endpoints
+- Query parameters for pagination and filtering
+- JWT authentication support
+
+---
+
 ## 🧪 Validation & Error Handling
 
-All incoming requests are validated using Zod
-
-Invalid requests return structured validation errors
-
-Errors are handled centrally using a global error handler
-
-Custom AppError class is used for clean error propagation
+- All incoming requests are validated using Zod
+- Invalid requests return structured validation errors
+- Errors are handled centrally using a global error handler
+- Custom AppError class is used for clean error propagation
 
 ### Example error response:
 
@@ -160,7 +199,7 @@ Custom AppError class is used for clean error propagation
 
 ## ⚙️ Environment Variables
 
-Create a .env file in the root directory:
+#### Create a .env file in the root directory:
 
 PORT=3000
 MONGO_URI=mongodb://127.0.0.1:27017/taskflow
@@ -169,13 +208,14 @@ JWT_SECRET=your_jwt_secret
 ---
 
 ## ▶️ Run Locally
+
 git clone https://github.com/Nirmal-Goyal/taskflow-api.git
 cd taskflow-api
 npm install
 npm run dev
 
 
-Server will start at:
+#### Server will start at:
 
 http://localhost:3000
 
@@ -183,33 +223,27 @@ http://localhost:3000
 
 ## 🎯 Design Decisions
 
-User ownership enforced at query level to prevent data leakage
-
-Validation before controllers to keep business logic clean
-
-Centralized error handling for consistency
-
-Minimal feature set in v1 to ensure correctness and clarity
+- Pagination and filtering implemented to support large datasets
+- User ownership enforced at query level for strict data isolation
+- Validation handled before controllers to keep business logic clean
+- Centralized error handling for consistent API responses
+- Swagger used to improve developer experience
 
 ---
 
 ## 🔮 Future Improvements (Planned)
 
-Pagination & filtering
-
-Refresh token support
-
-Role-based access control
-
-API documentation with Swagger
-
-Docker support
+- Cursor-based pagination
+- Refresh token support
+- Role-based access control (RBAC)
+- Rate limiting and API security hardening
+- Docker support
 
 ---
 
 ## 👤 Author
 
-Nirmal Goyal
+#### Nirmal Goyal
 
 GitHub: https://github.com/Nirmal-Goyal
 
@@ -219,6 +253,7 @@ Portfolio: https://nirmal-goyal.vercel.app
 
 ## 🏁 Status
 
-✅ Version 1 complete
+✅ Version 2 active
 🛠️ Actively improving and refactoring
 
+---
